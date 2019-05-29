@@ -28,17 +28,15 @@ abstract class Repository
         return  $this->model->orderBy($column)
         ->get();
     }
-    public function create($request)
+    public function create(array $request)
     {
-        // $this->model->forget($this->allCacheName);
-        return  $this->model->create($request->all());
+        return  $this->model->create($request);
     }
     public function update($request, $id)
     {
         // $this->model->forget($this->allCacheName);
         $model = $this->model->findOrFail($id);
-        return  $model->fill($request->all())
-        ->save();
+        return  $model->fill($request->all())->save();
     }
     public function findOrFail($id)
     {
@@ -50,16 +48,12 @@ abstract class Repository
     }
     public function select($value, $id)
     {
-        return  $this->model->select($value)
-        ->where('id', $id)
-        ->first();
+        return  $this->model->select($value)->where('id', $id)->first();
     }
     public function insertGetId(array $data)
     {
         $this->model->insert($data);
-        return  $this->model->select('id')
-        ->latest()
-        ->first();
+        return  $this->model->select('id')->latest()->first();
     }
     public function find($id)
     {
@@ -67,13 +61,11 @@ abstract class Repository
     }
     public function whereIn(array $id)
     {
-        return  $this->model->whereIn('id', $id)
-        ->get();
+        return  $this->model->whereIn('id', $id)->get();
     }
     public function getTheLastId()
     {
-        $model  =   $this->model->latest()
-                    ->first();
+        $model = $this->model->latest()->first();
         return  $model->id;
     }
     public function clearCache()
@@ -82,7 +74,7 @@ abstract class Repository
     }
     public function getNotification()
     {
-        return  $this->model->whereHas('notification', function($query) {
+        return $this->model->whereHas('notification', function($query) {
             $query->where('status', 'unseen');
         })->get();
     }

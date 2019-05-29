@@ -1,5 +1,5 @@
 {
-    "name": "laravel-api-jwt-cors-repository_pattern",
+    "name": "auth",
     "description": "An API Boilerplate to create a ready-to-use REST API in seconds.",
     "keywords": ["laravel", "api", "boilerplate", "jwt", "auth", "rest"],
     "license": "MIT",

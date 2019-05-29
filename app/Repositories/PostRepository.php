@@ -2,15 +2,17 @@
 
 namespace App\Repositories;
 
-use App\User;
+use App\Post;
 use App\Repositories\Repository;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Input;
 
-class UserRepository extends Repository
+class PostRepository extends Repository
 {
-    public function __construct(User $model)
+    public function __construct(Post $model)
     {
         parent::__construct($model);
     }
+
+    
 }

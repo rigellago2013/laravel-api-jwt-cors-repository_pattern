@@ -26,7 +26,14 @@ $api->version('v1', function (Router $api) {
             $api->get('all', 'App\\Api\\V1\\Controllers\\UserController@index');
             
         });
-       
+
+        $api->group(['prefix' => 'posts'], function(Router $api) {
+
+            $api->post('store', 'App\Api\V1\Controllers\PostController@store');
+            $api->get('all', 'App\Api\V1\Controllers\PostController@index');
+            
+        });
+
         $api->get('refresh', [
             'middleware' => 'jwt.refresh',
             function() {
@@ -35,6 +42,7 @@ $api->version('v1', function (Router $api) {
                 ]);
             }
         ]);
+
     });
 
     $api->get('hello', function() {
