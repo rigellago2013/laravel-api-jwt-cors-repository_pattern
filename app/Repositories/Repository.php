@@ -36,7 +36,7 @@ abstract class Repository
     {
         // $this->model->forget($this->allCacheName);
         $model = $this->model->findOrFail($id);
-        return  $model->fill($request->all())->save();
+        return  $model->fill($request)->save();
     }
     public function findOrFail($id)
     {

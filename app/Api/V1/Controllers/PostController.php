@@ -23,10 +23,12 @@ class PostController extends Controller
     public function index()
     {
         $user = JWTAuth::parseToken()->authenticate();
-        return $user
+        $data = $user
             ->posts()
             ->orderBy('created_at', 'DESC')
             ->get();
+
+        return response()->json(['data' => $data], 200);
     }
 
 
@@ -41,8 +43,8 @@ class PostController extends Controller
         ];
 
         if($this->post->create($data))
-            return $this->response->created();
+            return response()->json(['message' => 'success'], 200);
         else
-            return $this->response->error('could_not_create_book', 500);
+            return response()->json(['message' => 'error creating post.'], 500);
     }
 }
